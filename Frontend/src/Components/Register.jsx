@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { regUser } from "../Features/auth/authSlice";
+import { useNavigate } from 'react-router-dom';
 
 const Register = ({ hide }) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isLoading, isError, isSuccess, user, message } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    const data = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+    dispatch(regUser(data));
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+  };
+
+
+  useEffect(() => {
+    if (user) {
+      navigate("/home");
+    }
+  }, [navigate, user]);
+  
+  
   return (
     <>
       <div className="w-full h-screen flex items-center justify-center absolute bg-[#0000003f] backdrop-blur-md">
@@ -16,27 +49,38 @@ const Register = ({ hide }) => {
           <h1 className="text-white text-center">Create New Account</h1>
           <div className="flex items-center md:flex-row flex-col mt-4 justify-center w-full gap-3">
             <input
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               placeholder="First Name"
               className="md:w-40 w-full bg-[#3c3c3c] text-white px-3 h-10 rounded-md outline-none"
               type="text"
             />
             <input
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               placeholder="Last Name"
               className="md:w-40 w-full bg-[#3c3c3c] text-white px-3 h-10 rounded-md outline-none"
               type="text"
             />
           </div>
           <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Email"
             className="md:w-[95%] w-full mt-3 mx-auto block bg-[#3c3c3c] text-white px-3 h-10 rounded-md outline-none"
-            type="text"
+            type="email"
           />
           <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             className="md:w-[95%] w-full mt-3 mx-auto block bg-[#3c3c3c] text-white px-3 h-10 rounded-md outline-none"
-            type="text"
+            type="password"
           />
-          <button className="block w-[75%] transition-all duration-300 hover:bg-[#545454] rounded-full mx-auto mt-4 px-5 py-2 text-white bg-[#3c3c3c]">
+          <button
+            onClick={handleClick}
+            className="block w-[75%] transition-all duration-300 hover:bg-[#545454] rounded-full mx-auto mt-4 px-5 py-2 text-white bg-[#3c3c3c]"
+          >
             Next
           </button>
         </div>
