@@ -28,11 +28,6 @@ const Register = ({ hide }) => {
   };
 
 
-  useEffect(() => {
-    if (user) {
-      navigate("/home");
-    }
-  }, [navigate, user]);
   
   
   return (
