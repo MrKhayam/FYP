@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { regUser } from "../Features/auth/authSlice";
-import { useNavigate } from 'react-router-dom';
+import { regUser, reset } from "../Features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { RotatingLines } from 'react-loader-spinner';
 
 const Register = ({ hide }) => {
   const [firstName, setFirstName] = useState("");
@@ -10,7 +12,9 @@ const Register = ({ hide }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isLoading, isError, isSuccess, user, message } = useSelector((state) => state.auth);
+  const { isLoading, isError, isSuccess, user, message } = useSelector(
+    (state) => state.auth
+  );
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -21,15 +25,24 @@ const Register = ({ hide }) => {
       password,
     };
     dispatch(regUser(data));
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPassword("");
   };
 
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      navigate("/home");
+      toast.success(message);
+    }
 
-  
-  
+    dispatch(reset());
+  }, [isError, isSuccess]);
+
   return (
     <>
       <div className="w-full h-screen flex items-center justify-center absolute bg-[#0000003f] backdrop-blur-md">
@@ -74,9 +87,24 @@ const Register = ({ hide }) => {
           />
           <button
             onClick={handleClick}
-            className="block w-[75%] transition-all duration-300 hover:bg-[#545454] rounded-full mx-auto mt-4 px-5 py-2 text-white bg-[#3c3c3c]"
+            className="flex items-center justify-center w-[75%] transition-all duration-300 hover:bg-[#545454] rounded-full mx-auto mt-4 px-5 py-2 text-white bg-[#3c3c3c]"
           >
-            Next
+            {isLoading ? (
+              <RotatingLines
+                visible={true}
+                height="24"
+                width="24"
+                color="#18181b"
+                strokeColor="#18181b"
+                strokeWidth="5"
+                animationDuration="0.75"
+                ariaLabel="rotating-lines-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            ) : (
+              "Next"
+            )}
           </button>
         </div>
       </div>
