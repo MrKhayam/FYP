@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}));
 
 app.use("/api/user/", require('./Routes/userRoutes'));
+app.use("/api/posts/", require('./Routes/postRoutes'));
 app.use(errorHandler);
 
 app.listen(port, console.log(`Server Started at port: ${port}`));
