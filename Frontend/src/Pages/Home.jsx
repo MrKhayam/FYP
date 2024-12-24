@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Left from '../Components/Left';
 import Mid from '../Components/Mid';
@@ -13,11 +13,14 @@ const Home = () => {
       navigate('/');
     }
   }, [navigate, user]);
+
+        const dispatch = useDispatch();
+        const { isClicked } = useSelector((state) => state.nav);
   return (
     <>
       <div className="w-full h-screen overflow-hidden bg-black ">
         <div className="w-full h-full flex">
-          <div className="left md:border-r bg-zinc-900 overflow-auto w-[250px] md:relative absolute z-50 translate-x-[-100%] md:translate-x-0 md:w-[30%] lg:w-[20%] h-full">
+          <div className={`left transition-all duration-300 md:border-r bg-zinc-900 overflow-auto w-[250px] md:relative absolute z-50 ${isClicked ? 'translate-x-0' : 'translate-x-[-100%]'} md:translate-x-0 md:w-[30%] lg:w-[20%] h-full`}>
             <Left />
           </div>
           <div className="mid md:border-r lg:w-[55%] md:w-[70%] w-full h-full">

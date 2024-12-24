@@ -8,11 +8,16 @@ import { FaBookmark } from "react-icons/fa";
 import { LiaClipboardListSolid } from "react-icons/lia";
 import { FaCircleUser } from "react-icons/fa6";
 import { HiOutlineDotsCircleHorizontal } from "react-icons/hi";
+import { IoClose } from "react-icons/io5";
+import { useDispatch } from "react-redux";
+import { hide } from "../Features/Navbar/NavSlice";
+
 
 
 
 
 const Left = () => {
+
     const navIcons = [
       {
         icon: <FaHome />,
@@ -46,12 +51,14 @@ const Left = () => {
         icon: <HiOutlineDotsCircleHorizontal />,
         text: "More",
       },
-    ];
+  ];
+  const dispatch = useDispatch();
     return <>
         <div className="w-full h-full p-3 md:p-3">
             <div className="logo">
                 <RiServiceLine color="white" cursor="pointer" size={40} />
-            </div>
+        </div>
+        <IoClose onClick={() => dispatch(hide())} className="md:hidden block absolute top-5 right-5" color="white" cursor="pointer" size={25} />
             <ul className="flex flex-col gap-7 mt-3 p-3">
                 {
                     navIcons.map((icon, index) => {
