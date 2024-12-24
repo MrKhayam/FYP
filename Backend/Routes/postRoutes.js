@@ -6,3 +6,6 @@ const router = express.Router();
 
 
 router.post('/upload-post', authMiddleware, uploadPost);
+
+
+module.exports = router;
