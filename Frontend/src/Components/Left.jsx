@@ -48,17 +48,18 @@ const Left = () => {
       },
     ];
     return <>
-        <div className="w-full h-full p-8">
+        <div className="w-full h-full p-3 md:p-3">
             <div className="logo">
                 <RiServiceLine color="white" cursor="pointer" size={40} />
             </div>
             <ul className="flex flex-col gap-7 mt-3 p-3">
                 {
                     navIcons.map((icon, index) => {
-                        return <li className="flex text-white cursor-pointer gap-3 text-xl items-center">{icon.icon} {icon.text}</li>
+                        return <li key={index} className="flex text-white cursor-pointer gap-3 text-xl items-center">{icon.icon} {icon.text}</li>
                     })
                 }
-            </ul>
+        </ul>
+        <button className="flex mt-2 bg-white w-[80%] py-3 rounded-full items-center justify-center">Tweet</button>
         </div>
     </>;
 };

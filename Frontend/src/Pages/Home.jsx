@@ -15,15 +15,15 @@ const Home = () => {
   }, [navigate, user]);
   return (
     <>
-      <div className="w-full h-screen bg-zinc-900">
+      <div className="w-full h-screen overflow-hidden bg-black ">
         <div className="w-full h-full flex">
-          <div className="left md:border-r md:w-[20%] w-0 overflow-hidden">
+          <div className="left md:border-r bg-zinc-900 overflow-auto w-[250px] md:relative absolute z-50 translate-x-[-100%] md:translate-x-0 md:w-[30%] lg:w-[20%] h-full">
             <Left />
           </div>
-          <div className="mid md:border-r md:w-[55%] w-full h-full">
+          <div className="mid md:border-r lg:w-[55%] md:w-[70%] w-full h-full">
             <Mid />
           </div>
-          <div className="right md:border-r md:w-[25%] w-0 overflow-hidden">
+          <div className="right md:border-r lg:w-[25%] md:w-0 w-0 md:hidden lg:flex overflow-hidden">
             <Right />
           </div>
         </div>
