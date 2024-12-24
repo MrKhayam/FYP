@@ -7,6 +7,7 @@ import { MdOutlineEmojiEmotions } from "react-icons/md";
 import { RiMenu2Line } from "react-icons/ri";
 import { useDispatch } from "react-redux";
 import { clicked } from "../Features/Navbar/NavSlice";
+import Post from "./Post";
 
 
 
@@ -21,7 +22,7 @@ const Mid = () => {
     const dispatch = useDispatch();
     return (
       <>
-        <div className="w-full h-auto">
+        <div className="w-full h-full overflow-auto hide-scrollbar">
           <div className="top w-full bg-zinc-900 text-white h-auto p-3 border-b flex justify-between items-center">
             <div className="homeTop flex gap-3 items-center">
               <RiMenu2Line onClick={() => dispatch(clicked())} cursor="pointer" size={25} className="md:hidden block" />
@@ -61,7 +62,10 @@ const Mid = () => {
                 </div>
               </div>
             </div>
-          </div>
+                </div>
+                <div className="posts w-full h-auto mt-3">
+                  <Post />
+                </div>
         </div>
       </>
     );
