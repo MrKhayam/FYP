@@ -55,7 +55,7 @@ const Mid = () => {
                   })}
                 </ul>
                 <div className="postBtn">
-                  <button className="px-6 py-2 rounded-full bg-white text-black">
+                  <button className="px-6 transition-all duration-300 hover:bg-[#e6e6e6] py-2 rounded-full bg-white text-black">
                     Tweet
                   </button>
                 </div>
