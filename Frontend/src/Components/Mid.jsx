@@ -9,17 +9,29 @@ import { useDispatch } from "react-redux";
 import { clicked } from "../Features/Navbar/NavSlice";
 import Post from "./Post";
 
-
-
-
 const Mid = () => {
+
+  const [image, setImage] = useState(null);
+  const [imagePreview, setImagePreview] = useState(null);
+  const [imageLoading, setImageLoading] = useState(false);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const url = URL?.createObjectURL(file);
+    setImage(file);
+    setImagePreview(url);
+  }
+  
   const postIcons = [
     {
       icon: (
-        <div className="relative cursor-pointer">
+        <div className="relative cursor-pointer overflow-hidden">
           <FaImage />
-          <input className="absolute z-10 cursor-pointer top-0 left=[]" type="file" />
-          
+          <input
+            onChange={handleImageChange}
+            className="absolute z-10 cursor-pointer left-[-150px] opacity-0 top-0"
+            type="file"
+          />
         </div>
       ),
     },
@@ -31,14 +43,6 @@ const Mid = () => {
 
   // username: dqlxj8vxp
   // upload_preset: qcgyuz9o
-
-
-
-  const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [imageLoading, setImageLoading] = useState(false);
-  
-  
 
   return (
     <>
@@ -70,6 +74,13 @@ const Mid = () => {
               className="w-full h-10 mt-1 p-2 placeholder:text-[#999999] bg-zinc-900 outline-none text-white"
               placeholder="What's happening?"
             />
+            {
+              imagePreview && (
+                <div className="w-[90%] mx-auto border rounded-md my-3 h-[350px]">
+                  <img className="w-full h-full object-contain" src={imagePreview} alt="image" />
+                </div>
+              )
+            }
             <div className="w-full flex justify-between items-center">
               <ul className="postIcons flex items-center gap-3 p-2">
                 {postIcons.map((icons, index) => {
