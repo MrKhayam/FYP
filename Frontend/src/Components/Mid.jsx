@@ -16,13 +16,11 @@ const Mid = () => {
   const postIcons = [
     {
       icon: (
-        <li className="relative cursor-pointer">
+        <div className="relative cursor-pointer">
           <FaImage />
-          <input style={{cursor: 'pointer'}} className="absolute z-10 cursor-pointer top-0 left=[]" type="file" />
-          <div className="w-full h-full absolute top-0 left-0 cursor-pointer opacity-0">
-
-          </div>
-        </li>
+          <input className="absolute z-10 cursor-pointer top-0 left=[]" type="file" />
+          
+        </div>
       ),
     },
     { icon: <MdGifBox /> },
