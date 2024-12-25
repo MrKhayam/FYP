@@ -76,7 +76,7 @@ const Mid = () => {
             />
             {
               imagePreview && (
-                <div className="w-[90%] mx-auto border rounded-md my-3 h-[350px]">
+                <div className="w-[90%] mx-auto border flex items-center justify-center rounded-md my-3 md:min-h-[350px] min-h-[120px]">
                   <img className="w-full h-full object-contain" src={imagePreview} alt="image" />
                 </div>
               )
